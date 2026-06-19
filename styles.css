@@ -77,6 +77,39 @@ a {
   border-radius: 50%;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+}
+
+.language-switch button {
+  min-width: 34px;
+  min-height: 28px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.62);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.language-switch button.is-active {
+  background: var(--white);
+  color: var(--ink);
+}
+
 .site-nav {
   display: flex;
   align-items: center;
@@ -295,7 +328,7 @@ h3 {
 }
 
 .project-copy h3 a::after {
-  content: "Ver serie";
+  content: var(--series-link-label, "Ver serie");
   font-family: Inter, system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 800;
@@ -599,6 +632,20 @@ h3 {
 @media (max-width: 800px) {
   .site-header {
     padding: 18px 20px;
+  }
+
+  .header-actions {
+    gap: 10px;
+  }
+
+  .language-switch {
+    padding: 3px;
+  }
+
+  .language-switch button {
+    min-width: 31px;
+    min-height: 26px;
+    font-size: 0.72rem;
   }
 
   .menu-toggle {
