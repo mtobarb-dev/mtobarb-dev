@@ -23,6 +23,10 @@ body {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+body.is-lightbox-open {
+  overflow: hidden;
+}
+
 img {
   display: block;
   width: 100%;
@@ -44,15 +48,17 @@ a {
   justify-content: space-between;
   padding: 22px clamp(20px, 5vw, 64px);
   color: var(--white);
-  transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+  background: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(16px);
+  transition: background 180ms ease, box-shadow 180ms ease;
 }
 
 .site-header.is-scrolled,
 .site-header.is-open {
-  background: rgba(247, 245, 239, 0.94);
-  color: var(--ink);
-  box-shadow: 0 10px 34px rgba(17, 20, 17, 0.08);
-  backdrop-filter: blur(16px);
+  background: rgba(0, 0, 0, 0.94);
+  color: var(--white);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.24);
 }
 
 .brand {
@@ -216,6 +222,19 @@ h3 {
   padding: clamp(78px, 10vw, 132px) clamp(20px, 5vw, 64px);
 }
 
+.portfolio,
+.project-detail,
+.about {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.portfolio .eyebrow,
+.project-detail .eyebrow,
+.about .eyebrow {
+  color: rgba(255, 255, 255, 0.62);
+}
+
 .intro {
   display: flex;
   justify-content: flex-end;
@@ -255,7 +274,7 @@ h3 {
 }
 
 .project-copy span {
-  color: var(--moss);
+  color: rgba(255, 255, 255, 0.58);
   font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -269,8 +288,23 @@ h3 {
   line-height: 0.98;
 }
 
+.project-copy h3 a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.project-copy h3 a::after {
+  content: "Ver serie";
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .project-copy p {
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.68);
   line-height: 1.7;
 }
 
@@ -282,12 +316,12 @@ h3 {
 
 .project-meta div {
   padding-top: 14px;
-  border-top: 1px solid var(--soft);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .project-meta dt {
   margin-bottom: 5px;
-  color: var(--ink);
+  color: var(--white);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -296,7 +330,7 @@ h3 {
 
 .project-meta dd {
   margin: 0;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.62);
   font-size: 0.92rem;
   line-height: 1.55;
 }
@@ -305,7 +339,7 @@ h3 {
   display: inline-flex;
   align-items: center;
   margin-top: 22px;
-  color: var(--moss);
+  color: var(--white);
   font-weight: 800;
 }
 
@@ -321,6 +355,7 @@ h3 {
 }
 
 .project-grid img {
+  cursor: zoom-in;
   height: clamp(240px, 34vw, 460px);
   border-radius: 8px;
   object-fit: cover;
@@ -331,6 +366,28 @@ h3 {
   grid-row: span 2;
   height: 100%;
   min-height: clamp(500px, 70vw, 934px);
+}
+
+.project-detail {
+  padding-top: clamp(64px, 9vw, 116px);
+}
+
+.project-detail + .project-detail {
+  padding-top: 0;
+}
+
+.detail-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.detail-gallery img {
+  aspect-ratio: 4 / 5;
+  cursor: zoom-in;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: var(--shadow);
 }
 
 .about {
@@ -347,6 +404,7 @@ h3 {
 
 .about-image img {
   aspect-ratio: 4 / 5;
+  cursor: zoom-in;
   border-radius: 8px;
   object-fit: cover;
   box-shadow: var(--shadow);
@@ -360,9 +418,9 @@ h3 {
 
 .stats div {
   padding: 24px;
-  border: 1px solid var(--soft);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .stats dt {
@@ -373,14 +431,27 @@ h3 {
 
 .stats dd {
   margin: 8px 0 0;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.64);
+}
+
+.about-copy p {
+  color: rgba(255, 255, 255, 0.68);
 }
 
 .contact {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(280px, 560px);
   gap: clamp(34px, 7vw, 96px);
-  background: var(--soft);
+  background: var(--ink);
+  color: var(--white);
+}
+
+.contact .eyebrow {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.contact p {
+  color: rgba(255, 255, 255, 0.68);
 }
 
 .instagram-card {
@@ -388,20 +459,20 @@ h3 {
   align-content: center;
   min-height: 260px;
   padding: clamp(26px, 5vw, 46px);
-  border: 1px solid rgba(17, 20, 17, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.52);
+  background: rgba(255, 255, 255, 0.06);
   box-shadow: var(--shadow);
   transition: transform 160ms ease, background 160ms ease;
 }
 
 .instagram-card:hover {
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
 
 .instagram-card span {
-  color: var(--moss);
+  color: rgba(255, 255, 255, 0.62);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -409,15 +480,27 @@ h3 {
 }
 
 .instagram-card strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
   margin-top: 14px;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-size: clamp(1.6rem, 3.4vw, 2.7rem);
   line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.instagram-icon {
+  flex: 0 0 auto;
+  width: clamp(32px, 4vw, 48px);
+  height: clamp(32px, 4vw, 48px);
+  object-fit: contain;
 }
 
 .instagram-card small {
   margin-top: 24px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.62);
   font-size: 0.95rem;
   font-weight: 800;
 }
@@ -433,6 +516,90 @@ h3 {
 
 .site-footer p {
   margin: 0;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.92);
+  color: var(--white);
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox figure {
+  display: grid;
+  width: min(1120px, 100%);
+  max-height: calc(100svh - 48px);
+  gap: 18px;
+  margin: 0;
+}
+
+.lightbox img {
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100svh - 180px);
+  justify-self: center;
+  object-fit: contain;
+}
+
+.lightbox figcaption {
+  display: grid;
+  gap: 12px;
+}
+
+.lightbox figcaption p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-weight: 700;
+}
+
+.lightbox dl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+}
+
+.lightbox dl div {
+  min-width: 150px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+}
+
+.lightbox dt {
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lightbox dd {
+  margin: 5px 0 0;
+  font-weight: 800;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  min-height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  padding: 0 16px;
 }
 
 @media (max-width: 800px) {
@@ -475,9 +642,9 @@ h3 {
     gap: 4px;
     padding: 16px;
     border-radius: 8px;
-    background: var(--paper);
+    background: rgba(0, 0, 0, 0.94);
     box-shadow: var(--shadow);
-    color: var(--ink);
+    color: var(--white);
     opacity: 0;
     pointer-events: none;
     transform: translateY(-8px);
@@ -516,6 +683,10 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .detail-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .project-grid img,
   .project-grid .project-feature {
     height: auto;
@@ -525,6 +696,19 @@ h3 {
 
   .site-footer {
     display: grid;
+  }
+
+  .lightbox {
+    padding: 18px;
+  }
+
+  .lightbox img {
+    max-height: calc(100svh - 230px);
+  }
+
+  .lightbox dl {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -541,8 +725,17 @@ h3 {
     padding: 68px 18px;
   }
 
-  .photo-card,
-  .photo-card-large {
-    min-height: 330px;
+  .detail-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .instagram-card strong {
+    gap: 12px;
+    font-size: 1.55rem;
+  }
+
+  .instagram-icon {
+    width: 28px;
+    height: 28px;
   }
 }
